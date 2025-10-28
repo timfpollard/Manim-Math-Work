@@ -1,4 +1,4 @@
-# Manim/Math Stuff
+# My Manim Repo
 All of the animations I've made with Manim so far. Plus some other things
 
 Just cool stuff I wish to look at within math or make art with.
