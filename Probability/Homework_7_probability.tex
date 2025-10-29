@@ -1,0 +1,231 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{geometry}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{nicematrix}
+\usepackage{booktabs}
+\usepackage{tikz}
+\usepackage{sectsty}
+\usepackage{cancel}
+\geometry{margin=1in}
+
+\title{Engineering Probability \\ Homework 7}
+\author{Timothy Pollard, pollat@rpi.edu}
+\date{October 21st 2025}
+
+\sectionfont{\large\bfseries\color{black}} % makes them blue and large
+\newenvironment{bluetext}{\color{blue}}{}
+\begin{document}
+\maketitle
+\hrule
+
+
+\section*{(1) Gaussian Temperature in Antarctica.}
+
+The peak temperature T (in °F) on a July day in Antarctica is a Gaussian random
+\text{var}iable with \text{var}iance 225. With probability 1/2, the temperature T exceeds 10°F.
+\begin{bluetext}
+    \[\mu = 10, \sigma = \sqrt{225}\]
+\end{bluetext}\begin{enumerate}
+    \item[(a)] Compute $P[T > 32]$, the probability the temperature is above freezing.
+    \item[] \begin{bluetext}
+        \[P[T>32]=Q\left(\frac{32-10}{\sqrt{225}}\right)=1-\Phi\left(\frac{22}{15}\right)\approx1-\Phi\left(1.47\right)=0.0708\]
+    \end{bluetext}
+    \item[(b)] Compute $P[T < 0]$.
+    \item[] \begin{bluetext}
+        \[P[T<0]=\Phi\left(\frac{0-10}{\sqrt{225}}\right)=1-\Phi\left(\frac{10}{15}\right)\approx1-\Phi\left(0.67\right)=0.2514\]
+    \end{bluetext}
+    \item[(c)] Compute $P[T > 60]$.
+    \item[] \begin{bluetext}
+        \[[T > 60]=Q\left(\frac{60-10}{\sqrt{225}}\right)=1-\Phi\left(\frac{50}{15}\right)\approx1-\Phi(3.33)=0.0005 \]
+    \end{bluetext}
+\end{enumerate}
+
+\vspace{1cm}
+
+\section*{(2) Blackboard Error Payouts (Gaussian Approximation).}
+
+A professor pays \$0.25 for each blackboard error made in lecture to the student who
+points out the error. Over $n$ years, the total amount paid (in dollars) can be approximated by a Gaussian random \text{var}iable $Y_n$ with $\mathbb{E}[Y_n] = 40n$ and $\text{Var}[Y_n] = 100n$.
+\begin{bluetext}
+    \[\mu = 40n, \sigma = \sqrt{100n}\]
+\end{bluetext}
+\begin{enumerate}
+    \item[(a)] What is $P[Y_{20} > 1000]$?
+    \item[] \begin{bluetext} 
+        \[P[Y_{20} > 1000]=Q\left(\frac{1000-40(20)}{\sqrt{100(20)}}\right)\approx Q\left(4.47\right)=3.91\cdot10^{-6}\]
+    \end{bluetext}
+    \item[(b)] How many years $n$ are required so that $P[Y_n > 1000] > 0.99$?
+    \item[] \begin{bluetext}
+     \[P[Y_n > 1000] = 0.99, Q\left(z\right)=0.99, -2.32<z<-2.33\]
+     \[-2.32 = \frac{1000-40(n)}{\sqrt{100(n)}}, n\approx 28.073\]
+     \[-2.33 = \frac{1000-40(n)}{\sqrt{100(n)}}, n\approx 28.087\]
+     \[\therefore n = 29\]
+    \end{bluetext}
+\end{enumerate}
+
+\vspace{1cm}
+\newpage
+
+\section*{(3) Shot Put Distance as a Mixture.}
+
+With probability 0.7, the toss distance is $D = 60 + X$ meters, where $X$ is exponential
+with mean $\mu = 10$. Otherwise (probability 0.3), a foul is committed and $D = 0$.
+\begin{enumerate}
+    \item[(a)] Find the CDF $F_D(d)$ of $D$.
+    \item[] \begin{bluetext}
+    \[\int_{60}^{d} 0.7\cdot \frac{1}{10}e^{\frac{-(d-60)}{10}}dd=0.7\left.\left(-e^{\frac{-(d-60)}{10}}\right)\right\rvert_{60}^d=0.7\left(1-\left(e^{\frac{-(d-60)}{10}}\right)\right)\]
+                \[F_D(d)=u(d)0.3+0.7\left( 1 - e^{\frac{-(d-60)}{10}} \right)u(d-60)\]
+    \end{bluetext}
+    \item[(b)] Find the PDF $f_D(d)$ of $D$.
+    \item[] \begin{bluetext}
+        \[f_X(x)= \frac{1}{\mu}e^{\frac{-x}{\mu}}, \{x>0\} \]
+        \[f_D(d)=0.3\delta(d)+
+        0.7\cdot \frac{1}{10}e^{\frac{-(d-60)}{10}}u(d)
+        \]
+    \end{bluetext}
+\end{enumerate}
+
+\vspace{1cm}
+
+\section*{(4) Impulse + Exponential Tail (Mixed PDF).}
+
+Let $X$ be a mixed random \text{var}iable with an atom at $x = 0$ and a continuous exponential
+tail:
+
+\[
+f_X(x) = p\delta(x) + (1-p)\lambda e^{-\lambda x}u(x), \quad p \in (0, 1), \lambda > 0,
+\]
+
+where $\delta(\cdot)$ is the unit impulse (delta function) and $u(\cdot)$ is the unit step.
+
+\begin{enumerate}
+    \item[(a)] Find the CDF $F_X(x)$ for all $x \in R$ and clearly indicate the jump at $x = 0$.
+    \item[] \begin{bluetext}
+    \[\int_{0}^{x}{(1-p)\lambda e^{-\lambda x}}=\left.-(1-p)e^{-\lambda x}\right\rvert_0^{x}= -(1-p)e^{-\lambda x} - -(1-p) = (1-p)(1-e^{-\lambda x})\]
+        \[F_X(x) = p\delta(x)+\left(1-(1-p)e^{-\lambda x}\right)u(x)\]
+    \end{bluetext}
+    
+    Verify that $F_X$ is right-continuous and that $\lim_{x\to-\infty} F_X(x) = 0$, $\lim_{x\to\infty} F_X(x) = 1$.
+    \begin{bluetext}
+    \[\lim_{x\to-\infty} F_X(x) = 0\]
+    \[\lim_{x\to\infty} F_X(x) = \lim_{x\to\infty}1-(1-p)e^{-\lambda (x)}= 1-(1-p)(0)=1\]
+    \end{bluetext}
+    \item[(b)] Compute $P[X = 0]$, $P[X > t]$ for $t \geq 0$, and the first two moments $\mathbb{E}[X]$
+    and $\mathbb{E}[X^2]$. Hence, find $\text{Var}[X]$. (Show all steps. You may use $\int_0^\infty x^k e^{-\lambda x} dx = \frac{k!}{\lambda^{k+1}}$ for $k = 0, 1, 2$.)
+    \begin{bluetext}
+        \[P[X=0]=p\]
+        \[P[X>t]=(1-p)e^{-\lambda t}\]
+
+        \[\mathbb{E}[X]=0\cdot p +\int_{0}^{\infty}\left(x(1-p)\lambda e^{-\lambda x}\right)dx=\lambda(1-p)\frac{1!}{\lambda^2}= \frac{1-p}{\lambda}\]
+
+        \[\mathbb{E}[X^2]=0^2\cdot p +\int_{0}^{\infty}\left(x^2(1-p)\lambda e^{-\lambda x}\right)dx=\lambda(1-p)\frac{2!}{\lambda^3}= \frac{2-2p}{\lambda^2}\]
+
+        \[\text{Var}[X]=\frac{2-2p}{\lambda^2}-\left(\frac{1-p}{\lambda}\right)^2=\frac{1-p^2}{\lambda^2}\]
+    \end{bluetext}
+\end{enumerate}
+
+\newpage
+
+\section*{(5) Linear and Nonlinear Transforms of a Mixed RV.}
+
+Let $X$ be as in Question 4. Define $Y=aX+b$ with $a>0$ and $b\in\mathbb{R}$; and define $Z=X^{2}$.
+\begin{enumerate}
+    \item[(a)] Derive the PDF of $Y$ in the unified (impulse + continuous) form. Clearly specify the location and the weight of the impulse, and give the continuous part of $f_{Y}(y)$ for $y>b$.
+\begin{bluetext}
+\[
+f_X(x) = p\delta(x) + (1-p)\lambda e^{-\lambda x}u(x), \quad p \in (0, 1), \lambda > 0,
+\]
+\[F_X(x)=\left(1-(1-p)e^{-\lambda x}\right)u(x)\]
+\[F_Y(y)=\left(1-(1-p)e^{-\lambda \left(\frac{y-b}{a}\right)}\right)u\left(\frac{y-b}{a}\right)\]
+\[\frac{dF_Y(y)}{dy}=\left(\frac{\lambda}{a}(1-p)e^{-\lambda \left(\frac{y-b}{a}\right)}\right)u\left(\frac{y-b}{a}\right)+\left(1-(1-p)e^{-\lambda \left(\frac{y-b}{a}\right)}\right)\delta\left(\frac{y-b}{a}\right)\]
+\[\frac{dF_Y(y)}{dy}=f_Y(y)=\frac{\lambda}{a}(1-p)e^{-\lambda \left(\frac{y-b}{a}\right)}u(y-b)+p\delta(y-b)\]
+\begin{center}
+            Weight of impluse at ($y = 0$) is p
+\end{center}
+\[
+f_Y(y) = \frac{1}{a}\cdot\lambda(1-p)e^{-\lambda \left(\frac{y-b}{a}\right)} , y>b
+\]  
+\end{bluetext}
+    
+    \item[(b)] Derive the PDF of $Z$. Give it in unified form and identify any impulses (location and weight). Then provide the explicit formula for the continuous part $f_{Z}(z)$ for $z>0$.
+    \item[] \begin{bluetext}
+        \[F_X(x)=\left(1-(1-p)e^{-\lambda x}\right)u(x)\]\
+        \[F_Z(z)=\left(1-(1-p)e^{-\lambda \sqrt{z}}\right)u(\sqrt{z})\]
+        \[\frac{dF_Z(z)}{dz}=(1-p)\left(\frac{\lambda}{2\sqrt{z}}\right)e^{-\lambda \sqrt{z}}u(\sqrt{z})+\left(1-(1-p)e^{-\lambda \sqrt{z}}\right)\delta(\sqrt{z})\]
+        \[\frac{dF_Z(z)}{dz}=f_Z(z)=(1-p)\left(\frac{\lambda}{2\sqrt{z}}\right)e^{-\lambda \sqrt{z}}u(\sqrt{z})+p\delta(z)\]
+        \begin{center}
+            Weight of impluse at ($z = 0$) is p
+        \end{center}
+        \[f_Z(z)=(1-p)\left(\frac{\lambda}{2\sqrt{z}}\right)e^{-\lambda \sqrt{z}}, z>0\]
+    \end{bluetext}
+\end{enumerate}
+
+\vspace{1cm}
+\newpage 
+
+\section*{(6) Power Through a Resistor.}
+
+The voltage $X$ across a $1\,\Omega$ resistor is Uniform$(0,1)$. The instantaneous power is $Y=X^{2}$.
+\begin{enumerate}
+    \item[(a)] Find the CDF $F_{Y}(y)$.
+    \item[] \begin{bluetext}
+        \[F_X(x)= \begin{cases}
+        0, &x<0\\
+        x,& 0<x<1\\
+        1, &x>1
+        \end{cases}\]
+        \[X = \sqrt{Y}\]
+        \[F_Y(y)= \begin{cases}
+        0, &y<0\\
+        \sqrt{y},& 0<y<1\\
+        1, &y>1
+        \end{cases}\]
+    \end{bluetext}
+    \item[(b)] Find the PDF $f_{Y}(y)$.
+    \item[] \begin{bluetext}
+        \[f_Y(y)=\begin{cases}
+        \frac{1}{2\sqrt{y}}, & 0<y<1\\
+        0, & otherwise
+        \end{cases}\]
+    \end{bluetext}
+\end{enumerate}
+
+\vspace{1cm}
+\newpage
+
+\section*{(7) Square of an Exponential.}
+
+Let $Y=X^{2}$ where $X$ has PDF
+
+\[
+f_{X}(x)=\begin{cases}9e^{-9x},&x\geq 0,\\ 0,&\text{otherwise}.\end{cases}
+\]
+\begin{enumerate}
+    \item[(a)] Find the PDF $f_{Y}(y)$.
+    \item[] \begin{bluetext}
+        \[X=\sqrt{Y}\]
+        \[
+f_Y(y)
+= \frac{f_X(\sqrt{y})}{\left|\frac{d}{dx}x^2\right|}
++ \cancelto{0, \{x< 0\}}{\frac{f_X(-\sqrt{y})}{\left|\frac{d}{dx}(x^2)\right|}}
+= f_X(\sqrt{y}) \cdot \frac{1}{\left|2x\right|}
+= \frac{9e^{-9\sqrt{y}}}{2\sqrt{y}}
+\]
+Canceled second term $f_X$ is only defined when $x$ is negative, which is outside of the domain of X, or otherwise 0.
+ \end{bluetext}
+    \item[(b)] Compute $\mathbb{E}[Y]$.
+    \item[] \begin{bluetext}
+        \[E[Y]=E[X^2]=\frac{2}{(\lambda)^2}=\frac{2}{(9)^2}\]
+    \end{bluetext}
+    \item[(c)] Compute $\text{Var}[Y]$.
+    \item[] \begin{bluetext}
+        \[E[Y^2]=E[X^4]=\frac{4!}{\lambda^4}=\frac{4!}{9^4}\]
+        \[\text{Var}[Y]=\frac{4!}{9^4}-\left(\frac{2}{(9)^2}\right)^2=\frac{20}{9^4}\]
+    \end{bluetext}
+\end{enumerate}
+
+\end{document}
+\end{document}
+

@@ -1,0 +1,343 @@
+\documentclass{article}
+\usepackage[landscape]{geometry}
+\usepackage{url}
+\usepackage{multicol}
+\usepackage{amsmath}
+\usepackage{esint}
+\usepackage{amsfonts}
+\usepackage{tikz}
+\usetikzlibrary{decorations.pathmorphing}
+\usepackage{amsmath,amssymb}
+
+\usepackage{colortbl}
+\usepackage{xcolor}
+\usepackage{mathtools}
+\usepackage{amsmath,amssymb}
+\usepackage{enumitem}
+\makeatletter
+
+\newcommand*\bigcdot{\mathpalette\bigcdot@{.5}}
+\newcommand*\bigcdot@[2]{\mathbin{\vcenter{\hbox{\scalebox{#2}{$\m@th#1\bullet$}}}}}
+\makeatother
+
+\title{130 Cheat Sheet}
+\usepackage[utf8]{inputenc}
+
+\advance\topmargin-.8in
+\advance\textheight3in
+\advance\textwidth3in
+\advance\oddsidemargin-1.5in
+\advance\evensidemargin-1.5in
+\parindent0pt
+\parskip2pt
+\newcommand{\hr}{\centerline{\rule{3.5in}{1pt}}}
+%\colorbox[HTML]{e4e4e4}{\makebox[\textwidth-2\fboxsep][l]{texto}
+\author{Timothy Pollard}
+\date{October 3rd 2025}
+\begin{document}
+
+\begin{center}{\huge{\textbf{Probability Exam 1, Timothy Pollard, RIN:662084381}}}\\
+\end{center}
+\begin{multicols*}{3}
+
+\tikzstyle{mybox} = [draw=black, fill=white, very thick,
+    rectangle, rounded corners, inner sep=10pt, inner ysep=10pt]
+\tikzstyle{fancytitle} =[fill=black, text=white, font=\bfseries]
+
+%------------ Counting Methods ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    \begin{tabular}{|l|c|c|}
+    \hline
+    & W/ Ordering & W/o Ordering \\
+    \hline
+    W/ Replacement & $n^k$ & $\dbinom{n+k-1}{k}$ \\
+    \hline
+    W/o Replacement & $\dfrac{n!}{(n-k)!}$ & $\dbinom{n}{k}= \frac{n!}{(n-k)!k!}$ \\
+    \hline
+    \end{tabular}
+    \end{minipage}
+};
+%------------ Counting Methods Header ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {Counting Methods};
+\end{tikzpicture}
+
+%------------ Set Theory ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    Union: $A\cup B$\\
+    Intersection: $A \cap B$\\
+    Complement: $A^{c}$ \\
+    Difference: $A - B = A \cap B^c$ \\
+    Disjoint(Mutually Exclusive): $A \cap B = \emptyset$ \\
+    DeMorgan's Law: $(A \cup B)^c = A^c \cap B^c$ \\
+    Collectively Exhaustive: $\bigcup_{i=1}^{n} A_i = S$
+    \end{minipage}
+};
+%------------ Set Theory Header ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {Set Theory};
+\end{tikzpicture}
+
+%------------ Definitions ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    Experiment: Procedure, Observation, Model \\
+    Sample Space: set of all possible outcomes, $S$\\
+    Event: subset of sample space, $ E_i \subseteq S$ \\
+    Event Space: $\bigcup_{i=1}^{N}E_i=S, E_i \cap E_j = \emptyset$ \\
+    Outcome: any possible result of an experiment, $s \in S$ \\
+    Probability likelihood of an event A: $P(A)$ \
+    \end{minipage}
+};
+%------------ Definitions Header ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {Definitions};
+\end{tikzpicture}
+
+%------------ Axioms of Probability ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+        \begin{enumerate}
+        \item[1.] For any event $A$, $P(A)\geq 0$
+        \item[2.] $P(S)=1$
+        \item[3.] For any countable sequence of disjoint events $A_1, A_2, \ldots$,
+        $P(\bigcup_{i=1}^{\infty} A_i) = \sum_{i=1}^{\infty} P(A_i)$
+        \end{enumerate}
+    \end{minipage}
+};
+%------------ Axioms of Probability Header ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {Axioms of Probability};
+\end{tikzpicture}
+%------------ Bayes Rule & Axioms of Conditional Probability ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    Bayes Rule: $P(B|A)= \frac{P(A|B)P(B)}{P(A)}$\\
+    Conditional Probability: $P(A|B) = \frac{P(A \cap B)}{P(B)}$ \\
+    $P(A|B)P(B) = P(B|A)P(A)$
+    \begin{enumerate}
+        \item [1.] $P(A|B) \geq 0$
+        \item [2.] $P(B|B) = 1$
+        \item [3.] If $A=\bigcup_{i=1}^{N}{A_i}$ with $A_i \cap A_j = \emptyset$ \\
+        then $P(A|B) = \sum_{i=1}^{N} P(A_i|B)$
+    \end{enumerate}
+    \end{minipage}
+};
+%------------ Bayes Rule & Axioms of Conditional Probability Header---------------------
+\node[fancytitle, right=10pt] at (box.north west)  {Bayes Rule \& Axioms of Conditional Probability};
+\end{tikzpicture}
+%------------ Theroms ---------------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+        For any $A,B \subseteq S$:
+        \begin{enumerate}
+        \item[1.]$P(A^c) = 1 - P(A)$ 
+        \item[2.]$P(A) \leq 1$ 
+        \item[3.]$P(\emptyset) = 0$ 
+        \item[4.]If $B = \bigcup_{i=1}^{n} B_i$ and $B_i \cap B_j = \emptyset$ and $i \neq j$, Then \\ $P(B) = \sum_{i=1}^{n} P(A_i)$ 
+        \item[5.]$P(A\cup B) = P(A) + P(B) - P(A \cap B)$ 
+        \item[6.]If $A \subseteq B$ then $P(A) \leq P(B)$
+        \item[7.]For any event $A\subseteq B$ and event space $\{B_1, B_2, \ldots, B_n\}$ then $P(A) = \sum_{i=1}^{n} P(A \cap B_i)$
+        \item[8.]If a sample space has outcomes that are equally likely, then for any event $A$, $P(A) = \frac{|A|}{|S|}$
+        \end{enumerate}
+    \end{minipage}
+};
+%------------ Theroms Header ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {Theroms};
+\end{tikzpicture}
+
+
+%------------ Laws of Total Probability Content ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    \begin{enumerate}
+        \item[1.] Let $B_1, B_2 \dots B_i$ be collectively exhaustive and mutually exclusive
+        then for any event $A$, \\$A=\bigcup_{i=1}^N {A \cap B_i}$
+        \item[2.] $P(A) = \sum_{i=1}^N P(A \cap B_i) = \sum_{i=1}^N P(A|B_i)P(B_i)$
+    \end{enumerate}
+    \end{minipage}  
+};
+%------------ Laws of total Probability Header ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {Laws of Total Probability};
+\end{tikzpicture}
+
+%------------ Independence ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+        Independence: $P(A)P(B)= P(A\cap B)$\\
+        Conditional: $P(A|B)= P(A)$\\
+        Generalized: $P(\bigcap_{i=1}^N{A_i})=\prod_{i=1}^N{A_i}$
+    \end{minipage}
+};
+%------------ Independence Header ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {Independence};
+\end{tikzpicture}
+
+%------------ Expected Value & Variance  ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    $E[X]= \mu_X = \sum_{x\in S_X}^{}{}xP_X(x)$ = $\int_{-\infty}^{\infty}{xf_X(x)dx}$\\
+    Derived random variable $Y = g(X)$:\\
+    $E[Y]= \mu_Y = \sum_{x\in S_X}^{}{}g(x)P_X(x)$= $\int_{-\infty}^{\infty}{g(x)f_X(x)dx}$\\
+    $Y = aX+b, a,b \in \mathbb{R}$ Then, $E[Y]=aE[X]+b$\\
+    $Y = X- \mu_X$ Then, $E[Y]=E[X-\mu_X]=0$\\
+    Variance:\\
+    Var$(X)=\sum_{x\in S_X}^{}(x-\mu_X)^2P_X(x)$\\
+    Var$(X)=\int_{-\infty}^{\infty}{(x-\mu_X)^2f_X(x)dx}$\\
+    Var$(X)=\sigma_X^2=E[X^2]-(E[X])^2 \quad \sigma_X=\sqrt{\text{Var}(X)}$\\
+    If Y = X+b, Var$(Y)$=Var$(X)\quad$ Var$(\text{Const})=0$\\
+    If Y=aX, Var$(Y)$=$a^2$Var$(X)$
+    \end{minipage}
+};
+%------------  Expected Value & Variance Header ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {Expected Value \& Variance};
+\end{tikzpicture}
+\
+%------------ Random Variables & PMF ---------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    \small
+    Discrete, finite and continuous(PDF)\\
+    Random variables map Sample Space to $\mathbb{R}$: 
+    
+    $S = \{\zeta\}, S_X = {X(\zeta)\in \mathbb{R}|\zeta \in S}, S_X\subseteq \mathbb{R}$
+
+    Equivalent Events: 
+    $A = \{\zeta|X(\zeta)\in B\}$
+
+    For a random variable $X$ w/ $P_X(x)$ and range $S_X$
+    \begin{enumerate}
+        \item[1.] For any x $P_X(x) \geq 0$
+        \item[2.] $\sum_{x\in S_X}^{}{P_X(x)}=1$
+        \item[3.] For any event $B \subset S_X, P(B) = \sum_{x\in S_B}^{}{P_X(x)}$ 
+    \end{enumerate}
+    \textbf{Common Discrete R.Vs:}
+    \begin{center}
+    \scriptsize
+    \begin{tabular}{|l|l|l|}
+    \hline
+    \textbf{Name} & \textbf{PMF $P_X(x)$} & \textbf{E[x]} \\
+    \hline
+    Bernoulli &
+    $\begin{cases}
+    1-p, & x=0 \\
+    p, & x=1 \\
+    0, & \text{otherwise}
+    \end{cases}$ &
+    p \\
+
+    \hline
+    Geometric &
+    $\begin{cases}
+    p(1-p)^{x-1}, & x=1,2,\ldots \\
+    0, & \text{otherwise}
+    \end{cases}$ &
+    $\frac{1}{p}$ \\
+
+    \hline
+    Binomial &
+    $\begin{cases}
+    \binom{n}{x}p^x(1-p)^{n-x}, & x=0,1,\ldots,n \\
+    0, & \text{otherwise}
+    \end{cases}$ &
+    $np$ \\
+
+    \hline
+    Pascal &
+    $\begin{cases}
+    \binom{x-1}{k-1}p^k(1-p)^{x-k}, & x=k,k+1,\ldots \\
+    0, & \text{otherwise}
+    \end{cases}$ &
+    $\frac{k}{p}$ \\
+
+    \hline
+    Uniform &
+    $\begin{cases}
+    \dfrac{1}{l-k+1}, & x=k,k+1,\ldots,l \\
+    0, & \text{otherwise}
+    \end{cases}$ &
+    $\frac{k+l}{2}$ \\
+
+    \hline
+    Poisson &
+    $\begin{cases}
+    \dfrac{\alpha^x e^{-\alpha}}{x!}, & x=0,1,2,\ldots \\
+    0, & \text{otherwise}
+    \end{cases}$ &
+    $\alpha$ \\
+    \hline
+    \end{tabular}
+    \vspace{2pt}
+    PDF: $\frac{dF_X(x)}{dx}=f_X(x)$
+    \end{center}
+    \end{minipage}
+};
+%------------ Random Variables & PMF Header ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {Random Variables \& PMF};
+\end{tikzpicture}
+%------------ CMF/CDF ---------------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+	\[
+F_X(x) = P(X \leq x) = \sum_{y=-\infty}^{x}{P_X(x)}
+\]
+$
+    \lim_{x \to -\infty} F_X(x) = 0, 
+    \quad 
+    \lim_{x \to +\infty} F_X(x) = 1
+    $
+
+
+$F_X(x) = F_X(x_i) \text{ for all } x_i \leq x < x_{i+1}$
+
+$F_X(b) - F_X(a)=P(a < x \leq b)$
+\center$F_X(x) = \int_{-\infty}^{x}{f_X(u)du}$
+	\end{minipage}
+};
+%------------ CMF/CDF Header ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {CMF/CDF};
+\end{tikzpicture}
+
+%------------ Variance of Common R.V. ---------------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    \scriptsize{
+    \[
+    \begin{tabular}{|l|l|l|}
+    \hline
+    \textbf{R.V.} & \textbf{Parameters} & \textbf{Var(X)} \\
+    \hline
+    Bernoulli & $p \in [0,1]$ & $p(1-p)$ \\
+    \hline
+    Geometric & $p \in (0,1]$ & $\dfrac{1-p}{p^2}$ \\
+    \hline
+    Binomial & $n \in \mathbb{N},\, p \in [0,1]$ & $np(1-p)$ \\
+    \hline
+    Pascal & $k \in \mathbb{N},\, p \in (0,1]$ & $\dfrac{k(1-p)}{p^2}$ \\
+    \hline
+    Poisson & $\alpha > 0$ & $\alpha$ \\
+    \hline
+    Uniform & $k, l$ & $\dfrac{(l-k)(l-k+2)}{12}$ \\
+    \hline
+    \end{tabular}
+    \]
+    }
+    \end{minipage}
+};
+%------------ Variance of Common R.V. Header ---------------------
+\node[fancytitle, right=10pt] at (box.north west) {Variance of Common R.V.};
+\end{tikzpicture}
+\end{multicols*}
+\end{document}
+
+
